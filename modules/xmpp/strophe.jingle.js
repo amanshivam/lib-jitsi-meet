@@ -303,11 +303,13 @@ export default class JingleConnectionPlugin extends ConnectionPlugin {
         // peerconnection.
         // TODO: implement refresh via updateIce as described in
         //      https://code.google.com/p/webrtc/issues/detail?id=1650
+        console.log("inside getStunAndTurnCredentials");
         this.connection.sendIQ(
             $iq({ type: 'get',
                 to: this.connection.domain })
                 .c('services', { xmlns: 'urn:xmpp:extdisco:1' }),
             res => {
+                console.log("inside getStunAndTurnCredentials", res);
                 const iceservers = [];
 
                 $(res).find('>services>service').each((idx, el) => {
